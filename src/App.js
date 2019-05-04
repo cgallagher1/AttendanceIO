@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
+import TitleDisplay from './TitleDisplay'
 import './App.css';
 
 class App extends Component {
@@ -26,12 +27,9 @@ class App extends Component {
   {
     return (
       <div className="App">
-        <div className="boxes">
-          <div className="box"></div>
-          <div className="box"></div>
-          <div className="box"></div>
+        <div className="TitleDiv">
+          <TitleDisplay></TitleDisplay>
         </div>
-        <br></br>
         <h1>{this.state.speed}</h1>
       </div>
     );
