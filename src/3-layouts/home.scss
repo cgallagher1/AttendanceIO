@@ -1,0 +1,15 @@
+$neat-grid: (
+  columns: 12,
+  gutter: 20px,
+);
+
+.box {
+    background: pink;
+    @include size(100px);
+    @include margin(auto);
+    @include grid-column(4);
+}
+
+.boxes{
+    @include margin(20px);
+}
