@@ -202,6 +202,15 @@ hr {
   border-top: 0;
   margin: 1.5em 0; }
 
+/* appear on page load */
+.fade-appear {
+  opacity: 0;
+  z-index: 1; }
+
+.fade-appear .fade-appear-active {
+  opacity: 1;
+  transition: opacity 1000ms linear; }
+
 .box {
   background: pink;
   height: 100px;
@@ -214,18 +223,56 @@ hr {
 .boxes {
   margin: 20px; }
 
-.TitleDisplayDiv {
+#TitleDisplayDiv {
   position: absolute;
   margin: auto;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  width: 150px;
-  height: 100px;
+  width: 400px;
+  height: 300px;
   background-color: #ccc;
   border-radius: 3px;
   justify-content: center;
   text-align: center; }
+
+#TitleDisplayDiv.slideIn {
+  animation: fadein 3s;
+  -moz-animation: fadein 3s;
+  /* Firefox */
+  -webkit-animation: fadein 3s;
+  /* Safari and Chrome */
+  -o-animation: fadein 3s;
+  /* Opera */ }
+
+#TitleDisplayDiv.slideOut {
+  transform: translateX(-100%); }
+
+@keyframes fadein {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+@-moz-keyframes fadein {
+  /* Firefox */
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+@-webkit-keyframes fadein {
+  /* Safari and Chrome */
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+@-o-keyframes fadein {
+  /* Opera */
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+.TitleButtons {
+  margin-top: 55px; }
 
 /*# sourceMappingURL=App.css.map */

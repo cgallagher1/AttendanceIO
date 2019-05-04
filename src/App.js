@@ -9,9 +9,11 @@ class App extends Component {
     super();
 
     this.state = {
-      speed: 10
+      speed: 10,
+      titleVisible: true
     };
   }
+
 
   componentDidMount() {
     const rootRef = firebase.database().ref().child('Schools');
@@ -28,7 +30,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="TitleDiv">
-          <TitleDisplay></TitleDisplay>
+          <TitleDisplay visible={this.state.titleVisible}></TitleDisplay>
         </div>
         <h1>{this.state.speed}</h1>
       </div>
