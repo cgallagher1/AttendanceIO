@@ -7,20 +7,26 @@ class TitleDisplay extends Component {
         super();
     }
 
+    toggleNewClass = () => {
+        this.props.onNewClass();
+    }
+
 
     render() {
 
- 
-        let retval = 
-        <div id="TitleDisplayDiv" className={this.props.visible ? 'slideIn' : 'slideOut'}>
-            <h1>Attendance.io</h1>
-            <div className="TitleButtons">
-            <button type="button">Create New Class</button>
-            <br></br>
-            <br></br>
-            <button type="button">Use Existing Class</button>
+
+        let retval =
+            <div id="TitleDisplayDiv" className={this.props.visible ? 'slideIn' : 'slideOut'}>
+                <div className="TitleHeader">
+                    <h1>Attendance.io</h1>
+                </div>
+                <div id="TitleButtons" className="TitleButtons">
+                    <button type="button" onClick={this.toggleNewClass}>Create New Class</button>
+                    <br></br>
+                    <br></br>
+                    <button type="button">Use Existing Class</button>
+                </div>
             </div>
-        </div>
 
         return retval;
     }

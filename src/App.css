@@ -230,12 +230,13 @@ hr {
   right: 0;
   bottom: 0;
   left: 0;
-  width: 400px;
+  width: 600px;
   height: 300px;
   background-color: #ccc;
   border-radius: 3px;
   justify-content: center;
-  text-align: center; }
+  text-align: center;
+  border-style: solid; }
 
 #TitleDisplayDiv.slideIn {
   animation: fadein 3s;
@@ -247,7 +248,9 @@ hr {
   /* Opera */ }
 
 #TitleDisplayDiv.slideOut {
-  transform: translateX(-100%); }
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 1s, opacity 1s linear; }
 
 @keyframes fadein {
   from {
@@ -273,6 +276,13 @@ hr {
   to {
     opacity: 1; } }
 .TitleButtons {
-  margin-top: 55px; }
+  margin-top: 40px; }
+
+.TitleHeader {
+  margin-top: 20px; }
+
+#TitleButtons button, [type='button'] {
+  border-style: solid;
+  padding: 20px 50px; }
 
 /*# sourceMappingURL=App.css.map */
