@@ -1,0 +1,126 @@
+$neat-grid: (
+  columns: 12,
+  gutter: 20px,
+);
+
+#ClassCreationDiv label {
+  text-align: left;
+  font-weight: bold;
+}
+
+#CurrentRoster {
+  border-collapse: collapse;
+  height: 175px;
+  width: 98%;
+  margin-left: 2px;
+  overflow-y: auto;
+  display:block;
+}
+
+#CurrentRoster tbody {
+  width: 100%;
+  display: table;
+}
+
+#CurrentRoster td, #CurrentRoster th {
+  border: 1px solid black;
+  padding: 8px;
+}
+
+#CurrentRoster tr:nth-child(even){background-color: #f2f2f2;}
+
+#CurrentRoster tr:hover {background-color: #ddd;}
+
+#SubmitNewStudent{
+  justify-content: center;
+  text-align: center;
+}
+
+#CancelDiv {
+  justify-content: right;
+  text-align: right;
+}
+
+#CancelDiv button{
+  padding: 10px 10px;
+  margin: 5px;
+  background-color: red;
+}
+
+#NewClassDisplayDiv{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 800px;
+  height: 770px;
+  background-color: #A9E5BB;
+  border-radius: 3px;
+  justify-content: center;
+  text-align: center;
+  @include border-style(solid);
+}
+
+#NewClassDisplayDiv.slideIn {
+  animation: fadein 3s;
+  -moz-animation: fadein 3s; /* Firefox */
+  -webkit-animation: fadein 3s; /* Safari and Chrome */
+  -o-animation: fadein 3s; /* Opera */
+}
+
+#NewClassDisplayDiv.slideOut {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 1s, opacity 1s linear;
+}
+
+@keyframes fadein {
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+@-moz-keyframes fadein { /* Firefox */
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+@-o-keyframes fadein { /* Opera */
+  from {
+      opacity:0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+.RoasterCreatorDiv{
+  @include grid-container;
+}
+
+.studentNameDiv {
+  @include grid-column(4);
+}
+
+.studentIDDiv{
+  @include grid-column(4);
+}
+
+.studentPictureDiv{
+  @include grid-column(4);
+}

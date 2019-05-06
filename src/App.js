@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import TitleDisplay from './TitleDisplay';
-import NewGame from './NewGame';
+import NewClass from './NewClass';
 import './App.css';
 
 class App extends Component {
@@ -12,7 +12,7 @@ class App extends Component {
     this.state = {
       speed: 10,
       titleVisible: true,
-      newGameVisible: false
+      newClassVisible: false
     };
   }
 
@@ -31,7 +31,7 @@ class App extends Component {
     this.setState((currentState) => {
       const newState = {
         titleVisible: !currentState.titleVisible,
-        newGameVisible: !currentState.newGameVisible
+        newClassVisible: !currentState.newClassVisible
       };
       return newState;
     });
@@ -45,7 +45,7 @@ class App extends Component {
           <TitleDisplay onNewClass={this.toggleNewClass} visible={this.state.titleVisible}></TitleDisplay>
         </div>
         <div className="NewGameDiv">
-          <NewGame visible={this.state.newGameVisible}></NewGame>
+          <NewClass visible={this.state.newClassVisible}></NewClass>
         </div>
         <h1>{this.state.speed}</h1>
       </div>
