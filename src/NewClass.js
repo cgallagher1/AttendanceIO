@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as firebase from 'firebase';
 import './App.css';
 
 class NewClass extends Component {
@@ -15,6 +16,25 @@ class NewClass extends Component {
         this.setState({
             classNameSet: true
         });
+
+        let classNameHtml = document.getElementById("class_name").value;
+        firebase.database().ref('Classes/').child(classNameHtml + '/').set({
+            className: classNameHtml
+        })
+    }
+
+    toggleCancelNewClass = () => {
+        this.setState({
+            classNameSet: false
+        });
+        this.props.onCancel();
+    }
+
+    addStudent = () => {
+        let classNameHtml = document.getElementById("class_name").value;
+        let StudentIDHtml = document.getElementById("StudentID").value;
+        let StudentName = document.getElementById("StudentName").value;
+        let StudentPicture = document.getElementById('StudentPicture').files[0];
     }
 
     render() {
@@ -59,37 +79,15 @@ class NewClass extends Component {
                                 <div className="CurrentClassDiv">
                                     <label>Current Roster:</label>
                                     <table id="CurrentRoster" className="CurrentRoster">
-                                        <tbody>
+                                        <thead>
                                             <tr>
                                                 <th>Student ID</th>
                                                 <th>Student Name</th>
-                                                <th>Student Picture</th>
+                                                <th>Student Photo</th>
                                             </tr>
-                                            <tr>
-                                                <td>Division 1</td>
-                                                <td>Division 2</td>
-                                                <td>Division 3</td>
-                                            </tr>
-                                            <tr className="even">
-                                                <td>Division 1</td>
-                                                <td>Division 2</td>
-                                                <td>Division 3</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Division 1</td>
-                                                <td>Division 2</td>
-                                                <td>Division 3</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Division 1</td>
-                                                <td>Division 2</td>
-                                                <td>Division 3</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Division 1</td>
-                                                <td>Division 2</td>
-                                                <td>Division 3</td>
-                                            </tr>
+                                        </thead>
+                                        <tbody>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -98,7 +96,7 @@ class NewClass extends Component {
                                 </div>
                             </div>
                             <div id="CancelDiv" className="CancelDiv">
-                                <button id="CancelButton" type="button">Cancel</button>
+                                <button id="CancelButton" type="button" onClick={this.toggleCancelNewClass}>Cancel</button>
                             </div>
                         </div>
                     </div>
@@ -116,6 +114,9 @@ class NewClass extends Component {
                             <div className="SubmitNewStudent">
                                 <button id="EnterClass" type="button" onClick={this.onClassNameSubmit}>Enter</button>
                             </div>
+                        </div>
+                        <div id="CancelDiv" className="CancelDiv">
+                            <button id="CancelButton" type="button" onClick={this.toggleCancelNewClass}>Cancel</button>
                         </div>
                     </div>
             }

@@ -22,6 +22,11 @@ $neat-grid: (
   display: table;
 }
 
+#CurrentRoster thead {
+  width: 100%;
+  display: table;
+}
+
 #CurrentRoster td, #CurrentRoster th {
   border: 1px solid black;
   padding: 8px;

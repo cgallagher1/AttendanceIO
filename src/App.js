@@ -12,7 +12,8 @@ class App extends Component {
     this.state = {
       speed: 10,
       titleVisible: true,
-      newClassVisible: false
+      newClassVisible: false,
+      roster: []
     };
   }
 
@@ -37,6 +38,16 @@ class App extends Component {
     });
   }
 
+  toggleCancelNewClass = () => {
+    this.setState((currentState) => {
+      const newState = {
+        titleVisible: !currentState.titleVisible,
+        newClassVisible: !currentState.newClassVisible
+      };
+      return newState;
+    });
+  }
+
   render() 
   {
     return (
@@ -45,7 +56,7 @@ class App extends Component {
           <TitleDisplay onNewClass={this.toggleNewClass} visible={this.state.titleVisible}></TitleDisplay>
         </div>
         <div className="NewGameDiv">
-          <NewClass visible={this.state.newClassVisible}></NewClass>
+          <NewClass roster={this.state.roster} onCancel={this.toggleCancelNewClass} visible={this.state.newClassVisible}></NewClass>
         </div>
         <h1>{this.state.speed}</h1>
       </div>
