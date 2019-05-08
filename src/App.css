@@ -307,7 +307,11 @@ hr {
 
 #CurrentRoster td, #CurrentRoster th {
   border: 1px solid black;
-  padding: 8px; }
+  padding: 8px;
+  align-content: center; }
+
+#CurrentRoster img {
+  display: block; }
 
 #CurrentRoster tr:nth-child(even) {
   background-color: #f2f2f2; }

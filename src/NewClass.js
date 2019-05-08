@@ -16,11 +16,6 @@ class NewClass extends Component {
         this.setState({
             classNameSet: true
         });
-
-        let classNameHtml = document.getElementById("class_name").value;
-        firebase.database().ref('Classes/').child(classNameHtml + '/').set({
-            className: classNameHtml
-        })
     }
 
     toggleCancelNewClass = () => {
@@ -71,7 +66,60 @@ class NewClass extends Component {
                 })
             });
         });
+
+        const RosterRefObject = firebase.database().ref('Classes/').child(classNameHtml + '/').child('Roster/');
+
+        let tableRef = document.getElementById('tableBody');
+
+        RosterRefObject.on('child_added', snap => {
+            const tr = document.createElement('tr');
+            tr.id = snap.child("StudentID").val() + "tr";
+
+            let tdID = document.createElement('th');
+            tdID.id = snap.child("StudentID").val();
+            tdID.innerHTML = snap.child("StudentID").val();
+
+            tr.appendChild(tdID);
+
+            let tdStudentName = document.createElement('td');
+            tdStudentName.id = snap.child("StudentName").val();
+            tdStudentName.innerHTML = snap.child("StudentName").val();
+
+            tr.appendChild(tdStudentName);
+
+            let tdStudentPhoto = document.createElement('td');
+            tdStudentPhoto.id = snap.child("StudentName").val() + "Photo";
+            let img = document.createElement('img');
+            img.src = snap.child("StudentPicture").val();
+            tdStudentPhoto.append(img);
+
+
+            tr.appendChild(tdStudentPhoto);
+
+
+            let RemoveCol = document.createElement("td");
+            let deleteButton = document.createElement("button");
+            deleteButton.type = "button";
+            deleteButton.innerHTML = "Remove";
+            deleteButton.onclick = function () {
+                let RosterChild = RosterRefObject.child(snap.child("StudentID").val());
+                RosterChild.remove();
+            }
+            RemoveCol.appendChild(deleteButton);
+
+            tr.appendChild(RemoveCol);
+
+            tableRef.appendChild(tr);
+
+        });
+
+        RosterRefObject.on('child_removed', snap => {
+            const removeStudentName = document.getElementById(snap.child("StudentID").val() + "tr");
+            removeStudentName.remove();
+        });
     }
+
+
 
     render() {
 
@@ -94,7 +142,7 @@ class NewClass extends Component {
                             <label>Add New Student:</label>
                             <div id="RoasterCreatorDiv" className="RoasterCreatorDiv">
                                 <div id="studentIDDiv" className="studentIDDiv">
-                                    <label for="StudentID">Student ID:</label>
+                                    <label>Student ID:</label>
                                     <input type="text" id="StudentID"></input>
                                 </div>
                                 <div id="studentNameDiv" className="studentNameDiv">
@@ -120,9 +168,10 @@ class NewClass extends Component {
                                                 <th>Student ID</th>
                                                 <th>Student Name</th>
                                                 <th>Student Photo</th>
+                                                <th>Remove</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="tableBody">
 
                                         </tbody>
                                     </table>
