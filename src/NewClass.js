@@ -8,7 +8,8 @@ class NewClass extends Component {
         super();
 
         this.state = {
-            classNameSet: false
+            classNameSet: false,
+            readyToAdd: false
         };
     }
 
@@ -25,49 +26,9 @@ class NewClass extends Component {
         this.props.onCancel();
     }
 
-    addStudent = () => {
+    addTable() {
         let classNameHtml = document.getElementById("class_name").value;
-        let StudentIDHtml = document.getElementById("StudentID").value;
-        let StudentName = document.getElementById("StudentName").value;
-        let StudentPicture = document.getElementById('StudentPicture').files[0];
-
-        let filename = StudentPicture.name;
-        var storageRef = firebase.storage().ref();
-        var uploadTask = storageRef.child('/studentPictures/' + filename).put(StudentPicture);
-
-        // Register three observers:
-        // 1. 'state_changed' observer, called any time the state changes
-        // 2. Error observer, called on failure
-        // 3. Completion observer, called on successful completion
-        uploadTask.on('state_changed', function (snapshot) {
-            // Observe state change events such as progress, pause, and resume
-            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log('Upload is ' + progress + '% done');
-            switch (snapshot.state) {
-                case firebase.storage.TaskState.PAUSED: // or 'paused'
-                    console.log('Upload is paused');
-                    break;
-                case firebase.storage.TaskState.RUNNING: // or 'running'
-                    console.log('Upload is running');
-                    break;
-            }
-        }, function (error) {
-            // Handle unsuccessful uploads
-        }, function () {
-            // Handle successful uploads on complete
-            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-            uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-                console.log('File available at', downloadURL);
-                firebase.database().ref('Classes/').child(classNameHtml + '/').child('Roster/').child(StudentIDHtml).set({
-                    StudentID: StudentIDHtml,
-                    StudentName: StudentName,
-                    StudentPicture: downloadURL
-                })
-            });
-        });
-
-        const RosterRefObject = firebase.database().ref('Classes/').child(classNameHtml + '/').child('Roster/');
+        var RosterRefObject = firebase.database().ref('Classes/').child(classNameHtml + '/').child('Roster/');
 
         let tableRef = document.getElementById('tableBody');
 
@@ -86,16 +47,6 @@ class NewClass extends Component {
             tdStudentName.innerHTML = snap.child("StudentName").val();
 
             tr.appendChild(tdStudentName);
-
-            let tdStudentPhoto = document.createElement('td');
-            tdStudentPhoto.id = snap.child("StudentName").val() + "Photo";
-            let img = document.createElement('img');
-            img.src = snap.child("StudentPicture").val();
-            tdStudentPhoto.append(img);
-
-
-            tr.appendChild(tdStudentPhoto);
-
 
             let RemoveCol = document.createElement("td");
             let deleteButton = document.createElement("button");
@@ -119,11 +70,60 @@ class NewClass extends Component {
         });
     }
 
+    addStudent = () => {
+        let classNameHtml = document.getElementById("class_name").value;
+        let StudentIDHtml = document.getElementById("StudentID").value;
+        let StudentName = document.getElementById("StudentName").value;
+        let StudentPicture = document.getElementById('StudentPicture').files[0];
 
+        let filename = StudentPicture.name;
+        var storageRef = firebase.storage().ref();
+        var uploadTask = storageRef.child('/studentPictures/' + filename).put(StudentPicture);
+
+        // Register three observers:
+        // 1. 'state_changed' observer, called any time the state changes
+        // 2. Error observer, called on failure
+        // 3. Completion observer, called on successful completion
+        uploadTask.on('state_changed', function (snapshot) {
+            // Observe state change events such as progress, pause, and resume
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            switch (snapshot.state) {
+                case firebase.storage.TaskState.PAUSED: // or 'paused'
+                    break;
+                case firebase.storage.TaskState.RUNNING: // or 'running'
+                    break;
+            }
+        }, function (error) {
+            // Handle unsuccessful uploads
+        }, function () {
+            // Handle successful uploads on complete
+            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+            uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                console.log('File available at', downloadURL);
+                firebase.database().ref('Classes/').child(classNameHtml + '/').child('Roster/').child(StudentIDHtml).set({
+                    StudentID: StudentIDHtml,
+                    StudentName: StudentName,
+                    StudentPicture: downloadURL
+                })
+            });
+        });
+
+        if(this.state.readyToAdd == false){
+            this.addTable();
+            this.setState({
+                readyToAdd: true
+            });
+        }
+
+    
+        document.getElementById("StudentID").value = "";
+        document.getElementById("StudentName").value = "";
+        document.getElementById('StudentPicture').value = "";
+
+    }
 
     render() {
-
-
         let retval;
         if (this.props.visible) {
             if (this.state.classNameSet) {
@@ -165,10 +165,9 @@ class NewClass extends Component {
                                     <table id="CurrentRoster" className="CurrentRoster">
                                         <thead>
                                             <tr>
-                                                <th>Student ID</th>
-                                                <th>Student Name</th>
-                                                <th>Student Photo</th>
-                                                <th>Remove</th>
+                                                <th class="rowID">Student ID</th>
+                                                <th class="rowName">Student Name</th>
+                                                <th class="rowRemove">Remove</th>
                                             </tr>
                                         </thead>
                                         <tbody id="tableBody">

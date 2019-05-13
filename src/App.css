@@ -297,15 +297,30 @@ hr {
   overflow-y: auto;
   display: block; }
 
-#CurrentRoster tbody {
+#CurrentRoster table {
   width: 100%;
-  display: table; }
+  table-layout: fixed; }
 
-#CurrentRoster thead {
-  width: 100%;
-  display: table; }
+.rowID {
+  width: 35%; }
 
-#CurrentRoster td, #CurrentRoster th {
+.rowName {
+  width: 35%; }
+
+.rowRemove {
+  width: 30%; }
+
+#CurrentRoster th {
+  border: 1px solid black;
+  padding: 8px;
+  align-content: center; }
+
+#CurrentRoster tr {
+  border: 1px solid black;
+  padding: 8px;
+  align-content: center; }
+
+#CurrentRoster td {
   border: 1px solid black;
   padding: 8px;
   align-content: center; }
