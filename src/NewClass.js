@@ -21,7 +21,19 @@ class NewClass extends Component {
 
     toggleCancelNewClass = () => {
         this.setState({
-            classNameSet: false
+            classNameSet: false,
+            readyToAdd: false
+        });
+        let classNameHtml = document.getElementById("class_name").value;
+        let RosterRefObject = firebase.database().ref('Classes/').child(classNameHtml + '/');
+        RosterRefObject.remove();
+        this.props.onCancel();
+    }
+
+    toggleSubmitNewClass = () => {
+        this.setState({
+            classNameSet: false,
+            readyToAdd: false
         });
         this.props.onCancel();
     }
@@ -109,7 +121,7 @@ class NewClass extends Component {
             });
         });
 
-        if(this.state.readyToAdd == false){
+        if(this.state.readyToAdd === false){
             this.addTable();
             this.setState({
                 readyToAdd: true
@@ -160,14 +172,14 @@ class NewClass extends Component {
                                 <div className="SubmitNewStudent">
                                     <button id="EnterStudent" type="button" onClick={this.addStudent}>Enter</button>
                                 </div>
-                                <div className="CurrentClassDiv">
+                                <div id="CurrentClassDiv" className="CurrentClassDiv">
                                     <label>Current Roster:</label>
                                     <table id="CurrentRoster" className="CurrentRoster">
                                         <thead>
                                             <tr>
-                                                <th class="rowID">Student ID</th>
-                                                <th class="rowName">Student Name</th>
-                                                <th class="rowRemove">Remove</th>
+                                                <th className="rowID">Student ID</th>
+                                                <th className="rowName">Student Name</th>
+                                                <th className="rowRemove">Remove</th>
                                             </tr>
                                         </thead>
                                         <tbody id="tableBody">
@@ -176,7 +188,7 @@ class NewClass extends Component {
                                     </table>
                                 </div>
                                 <div className="SubmitNewStudent">
-                                    <button id="SubmitClassButton" type="button">Submit</button>
+                                    <button id="SubmitClassButton" type="button" onClick={this.toggleSubmitNewClass}>Submit</button>
                                 </div>
                             </div>
                             <div id="CancelDiv" className="CancelDiv">
@@ -200,7 +212,7 @@ class NewClass extends Component {
                             </div>
                         </div>
                         <div id="CancelDiv" className="CancelDiv">
-                            <button id="CancelButton" type="button" onClick={this.toggleCancelNewClass}>Cancel</button>
+                            <button id="CancelButton" type="button" onClick={this.toggleSubmitNewClass}>Cancel</button>
                         </div>
                     </div>
             }

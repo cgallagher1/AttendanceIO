@@ -8,30 +8,18 @@ $neat-grid: (
   font-weight: bold;
 }
 
+#CurrentClassDiv {
+  height: 175px;
+  overflow-y: auto;
+}
+
 #CurrentRoster {
   border-collapse: collapse;
   height: 175px;
   width: 98%;
   margin-left: 2px;
   overflow-y: auto;
-  display:block;
-}
-
-#CurrentRoster table {
-  width: 100%;
-  table-layout: fixed;
-}
-
-.rowID {
-  width: 35%;
-}
-
-.rowName {
-  width: 35%;
-}
-
-.rowRemove{
-  width: 30%;
+  display: table;
 }
 
 #CurrentRoster th {
