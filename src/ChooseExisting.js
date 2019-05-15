@@ -12,6 +12,30 @@ class ChooseExisting extends Component {
         this.props.onCancel();
     }
 
+    addTable() {
+        var ClassesRefObject = firebase.database().ref('Classes/');
+
+        let tableRef = document.getElementById('availableClassTableBody');
+
+        ClassesRefObject.on('child_added', snap => {
+            const tr = document.createElement('tr');
+
+            let RemoveCol = document.createElement("td");
+            let chooseButton = document.createElement("button");
+            chooseButton.type = "button";
+            chooseButton.innerHTML = snap.key();
+            chooseButton.onclick = function () {
+                console.log(chooseButton.innerHTML)
+                this.props.setChosenClass(chooseButton.innerHTML);
+            }
+            RemoveCol.appendChild(chooseButton);
+
+            tr.appendChild(RemoveCol);
+
+            tableRef.appendChild(tr);
+        });
+    }
+
     render() {
         let retval;
         if (this.props.visible) {
@@ -24,7 +48,16 @@ class ChooseExisting extends Component {
                         <h2>Please Choose Your Class</h2>
                     </div>
                     <div className="ChoosingClassTableDiv">
-                        <h3>Table Goes Here</h3>
+                        <table id="availableClasses" className="availableClasses">
+                            <thead>
+                                <tr>
+                                    <th>Class Name</th>
+                                </tr>
+                            </thead>
+                            <tbody id="availableClassTableBody">
+
+                            </tbody>
+                        </table>
                     </div>
                     <div id="CancelDiv" className="CancelDiv">
                         <button id="CancelButton" type="button" onClick={this.toggleCancelExisting}>Cancel</button>

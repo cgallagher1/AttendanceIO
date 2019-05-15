@@ -439,4 +439,9 @@ hr {
   opacity: 0;
   transition: visibility 0s 1s, opacity 1s linear; }
 
+.ChoosingClassTableDiv {
+  max-height: 500px;
+  align-content: center;
+  overflow-y: auto; }
+
 /*# sourceMappingURL=App.css.map */

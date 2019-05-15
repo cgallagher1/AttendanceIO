@@ -14,6 +14,7 @@ class App extends Component {
       titleVisible: true,
       newClassVisible: false,
       useExistingVisible: false,
+      chosenClass: "none",
       roster: []
     };
   }
@@ -21,6 +22,18 @@ class App extends Component {
 
   componentDidMount() {
     console.log("good");
+  }
+
+
+  setChosenClass = (chosenClass) => {
+    this.setState((currentState) => {
+      const newState = {
+        titleVisible: !currentState.titleVisible,
+        useExistingVisible: !currentState.useExistingVisible,
+        chosenClass: chosenClass
+      };
+      return newState;
+    });
   }
 
   toggleNewClass = () => {
@@ -63,8 +76,7 @@ class App extends Component {
     });
   }
 
-  render() 
-  {
+  render() {
     return (
       <div className="App">
         <div className="TitleDiv">
@@ -74,7 +86,7 @@ class App extends Component {
           <NewClass onCancel={this.toggleCancelNewClass} visible={this.state.newClassVisible}></NewClass>
         </div>
         <div className="UseExistingDiv">
-          <ChooseExisting onCancel={this.toggleCancelUseExistingClass} visible={this.state.useExistingVisible}></ChooseExisting>
+          <ChooseExisting setChosenClass={this.setChosenClass} chosenClass={this.state.chosenClass} onCancel={this.toggleCancelUseExistingClass} visible={this.state.useExistingVisible}></ChooseExisting>
         </div>
       </div>
     );

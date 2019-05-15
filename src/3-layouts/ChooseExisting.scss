@@ -31,3 +31,12 @@ $neat-grid: (
     opacity: 0;
     transition: visibility 0s 1s, opacity 1s linear;
   }
+
+  .ChoosingClassTableDiv {
+    max-height: 500px;
+    align-content: center;
+    overflow-y: auto;
+    text-align: center;
+    border-collapse: collapse;
+    border: 1px solid black;
+  }
