@@ -1,0 +1,33 @@
+$neat-grid: (
+  columns: 12,
+  gutter: 20px,
+);
+
+#UseExistingDisplayDiv{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 800px;
+    height: 770px;
+    background-color: #A9E5BB;
+    border-radius: 3px;
+    justify-content: center;
+    text-align: center;
+    @include border-style(solid);
+  }
+  
+  #UseExistingDisplayDiv.slideIn {
+    animation: fadein 3s;
+    -moz-animation: fadein 3s; /* Firefox */
+    -webkit-animation: fadein 3s; /* Safari and Chrome */
+    -o-animation: fadein 3s; /* Opera */
+  }
+  
+  #UseExistingDisplayDiv.slideOut {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 1s, opacity 1s linear;
+  }

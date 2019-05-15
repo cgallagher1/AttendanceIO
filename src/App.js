@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import * as firebase from 'firebase';
 import TitleDisplay from './TitleDisplay';
 import NewClass from './NewClass';
+import ChooseExisting from './ChooseExisting';
 import './App.css';
 
 class App extends Component {
@@ -13,19 +13,14 @@ class App extends Component {
       speed: 10,
       titleVisible: true,
       newClassVisible: false,
+      useExistingVisible: false,
       roster: []
     };
   }
 
 
   componentDidMount() {
-    const rootRef = firebase.database().ref().child('Schools');
-    const speedRef = rootRef.child('Speed');
-    speedRef.on('value', snap => {
-      this.setState({
-        speed: snap.val()
-      });
-    }); 
+    console.log("good");
   }
 
   toggleNewClass = () => {
@@ -48,17 +43,39 @@ class App extends Component {
     });
   }
 
+  toggleUseExistingClass = () => {
+    this.setState((currentState) => {
+      const newState = {
+        titleVisible: !currentState.titleVisible,
+        useExistingVisible: !currentState.useExistingVisible
+      };
+      return newState;
+    });
+  }
+
+  toggleCancelUseExistingClass = () => {
+    this.setState((currentState) => {
+      const newState = {
+        titleVisible: !currentState.titleVisible,
+        useExistingVisible: !currentState.useExistingVisible
+      };
+      return newState;
+    });
+  }
+
   render() 
   {
     return (
       <div className="App">
         <div className="TitleDiv">
-          <TitleDisplay onNewClass={this.toggleNewClass} visible={this.state.titleVisible}></TitleDisplay>
+          <TitleDisplay onNewClass={this.toggleNewClass} onUseExistingClass={this.toggleUseExistingClass} visible={this.state.titleVisible}></TitleDisplay>
         </div>
         <div className="NewGameDiv">
-          <NewClass roster={this.state.roster} onCancel={this.toggleCancelNewClass} visible={this.state.newClassVisible}></NewClass>
+          <NewClass onCancel={this.toggleCancelNewClass} visible={this.state.newClassVisible}></NewClass>
         </div>
-        <h1>{this.state.speed}</h1>
+        <div className="UseExistingDiv">
+          <ChooseExisting onCancel={this.toggleCancelUseExistingClass} visible={this.state.useExistingVisible}></ChooseExisting>
+        </div>
       </div>
     );
   }

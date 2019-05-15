@@ -11,6 +11,10 @@ class TitleDisplay extends Component {
         this.props.onNewClass();
     }
 
+    toggleUseExisting = () => {
+        this.props.onUseExistingClass();
+    }
+
 
     render() {
 
@@ -24,7 +28,7 @@ class TitleDisplay extends Component {
                     <button type="button" onClick={this.toggleNewClass}>Create New Class</button>
                     <br></br>
                     <br></br>
-                    <button type="button">Use Existing Class</button>
+                    <button type="button" onClick={this.toggleUseExisting}>Use Existing Class</button>
                 </div>
             </div>
 
