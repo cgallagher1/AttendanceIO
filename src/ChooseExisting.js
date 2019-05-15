@@ -6,10 +6,9 @@ class ChooseExisting extends Component {
 
     constructor(props) {
         super();
-    }
-
-    toggleCancelExisting = () => {
-        this.props.onCancel();
+        this.state = {
+            showClasses: false
+        };
     }
 
     addTable() {
@@ -23,7 +22,8 @@ class ChooseExisting extends Component {
             let RemoveCol = document.createElement("td");
             let chooseButton = document.createElement("button");
             chooseButton.type = "button";
-            chooseButton.innerHTML = snap.key();
+            chooseButton.innerHTML = "hello";
+            console.log(chooseButton.innerHTML);
             chooseButton.onclick = function () {
                 console.log(chooseButton.innerHTML)
                 this.props.setChosenClass(chooseButton.innerHTML);
@@ -31,13 +31,25 @@ class ChooseExisting extends Component {
             RemoveCol.appendChild(chooseButton);
 
             tr.appendChild(RemoveCol);
-
             tableRef.appendChild(tr);
         });
     }
 
-    addTable();
-    
+    toggleCancelExisting = () => {
+        this.setState({
+            showClasses: false
+        });
+        this.props.onCancel();
+    }
+
+    onShowClassesSubmit = () => {
+        this.setState({
+            showClasses: true
+        });
+
+        this.addTable();
+    }
+
     render() {
         let retval;
         if (this.props.visible) {

@@ -441,10 +441,22 @@ hr {
 
 .ChoosingClassTableDiv {
   max-height: 500px;
-  align-content: center;
   overflow-y: auto;
-  text-align: center;
   border-collapse: collapse;
-  border: 1px solid black; }
+  border: 1px solid black;
+  background-color: #DDDDDD; }
+
+#availableClasses {
+  margin-left: auto;
+  margin-right: auto; }
+
+#chooseButtonDiv {
+  align-content: center; }
+
+#availableClasses tr:nth-child(even) {
+  background-color: #f2f2f2; }
+
+#availableClasses tr:hover {
+  background-color: #ddd; }
 
 /*# sourceMappingURL=App.css.map */
