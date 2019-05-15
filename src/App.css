@@ -444,14 +444,40 @@ hr {
   overflow-y: auto;
   border-collapse: collapse;
   border: 1px solid black;
-  background-color: #DDDDDD; }
+  padding-bottom: 20px; }
 
 #availableClasses {
   margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+  background-color: white; }
+
+#availableClasses th {
+  border: 1px solid black;
+  padding: 8px;
+  align-content: center;
+  text-align: center; }
+
+#availableClasses tr {
+  border: 1px solid black;
+  padding: 8px;
+  align-content: center;
+  text-align: center; }
+
+#availableClassTableBody button {
+  width: 100%;
+  background-color: #042A2B; }
+
+#availableClasses td {
+  border: 1px solid black;
+  padding: 8px;
+  align-content: center;
+  text-align: center; }
 
 #chooseButtonDiv {
   align-content: center; }
+
+#ChoseButton {
+  padding: 20px 200px; }
 
 #availableClasses tr:nth-child(even) {
   background-color: #f2f2f2; }

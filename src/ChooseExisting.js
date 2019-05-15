@@ -22,14 +22,12 @@ class ChooseExisting extends Component {
             let RemoveCol = document.createElement("td");
             let chooseButton = document.createElement("button");
             chooseButton.type = "button";
-            chooseButton.innerHTML = "hello";
-            console.log(chooseButton.innerHTML);
-            chooseButton.onclick = function () {
-                console.log(chooseButton.innerHTML)
+            chooseButton.innerHTML = snap.key;
+            chooseButton.onclick = () => {
+                console.log(chooseButton.innerHTML);
                 this.props.setChosenClass(chooseButton.innerHTML);
-            }
+            };
             RemoveCol.appendChild(chooseButton);
-
             tr.appendChild(RemoveCol);
             tableRef.appendChild(tr);
         });
@@ -61,6 +59,7 @@ class ChooseExisting extends Component {
                     <div className="ChoosingClassDiv">
                         <h2>Please Choose Your Class</h2>
                     </div>
+                    
                     <div className="ChoosingClassTableDiv">
                         <table id="availableClasses" className="availableClasses">
                             <thead>
@@ -72,6 +71,11 @@ class ChooseExisting extends Component {
 
                             </tbody>
                         </table>
+                    </div>
+                    <br></br>
+                    <br></br>
+                    <div className="chooseButtonDiv" id="chooseButtonDiv">
+                    <button id="ChoseButton" className="ChoseButton" type="button" onClick={this.onShowClassesSubmit}>Show Classes</button>
                     </div>
                     <div id="CancelDiv" className="CancelDiv">
                         <button id="CancelButton" type="button" onClick={this.toggleCancelExisting}>Cancel</button>
