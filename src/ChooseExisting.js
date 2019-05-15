@@ -8,12 +8,27 @@ class ChooseExisting extends Component {
         super();
     }
 
+    toggleCancelExisting = () => {
+        this.props.onCancel();
+    }
+
     render() {
         let retval;
         if (this.props.visible) {
             retval =
                 <div id="UseExistingDisplayDiv" className={this.props.visible ? 'slideIn' : 'slideOut'}>
-                  <h1>Hello Existing</h1>
+                    <div className="TitleHeader">
+                        <h1>Attendance.io</h1>
+                    </div>
+                    <div className="ChoosingClassDiv">
+                        <h2>Please Choose Your Class</h2>
+                    </div>
+                    <div className="ChoosingClassTableDiv">
+                        <h3>Table Goes Here</h3>
+                    </div>
+                    <div id="CancelDiv" className="CancelDiv">
+                        <button id="CancelButton" type="button" onClick={this.toggleCancelExisting}>Cancel</button>
+                    </div>
                 </div>
         }
         else {
