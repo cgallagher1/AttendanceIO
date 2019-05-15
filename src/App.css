@@ -442,6 +442,9 @@ hr {
 .ChoosingClassTableDiv {
   max-height: 500px;
   align-content: center;
-  overflow-y: auto; }
+  overflow-y: auto;
+  text-align: center;
+  border-collapse: collapse;
+  border: 1px solid black; }
 
 /*# sourceMappingURL=App.css.map */

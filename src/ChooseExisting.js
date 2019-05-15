@@ -36,6 +36,8 @@ class ChooseExisting extends Component {
         });
     }
 
+    addTable();
+    
     render() {
         let retval;
         if (this.props.visible) {
