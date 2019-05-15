@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TitleDisplay from './TitleDisplay';
 import NewClass from './NewClass';
 import ChooseExisting from './ChooseExisting';
+import ClassView from './ClassView';
 import './App.css';
 
 class App extends Component {
@@ -14,6 +15,7 @@ class App extends Component {
       titleVisible: true,
       newClassVisible: false,
       useExistingVisible: false,
+      classVisible: false,
       chosenClass: "none",
       roster: []
     };
@@ -28,7 +30,7 @@ class App extends Component {
   setChosenClass = (chosenClass) => {
     this.setState((currentState) => {
       const newState = {
-        titleVisible: !currentState.titleVisible,
+        classVisible: !currentState.classVisible,
         useExistingVisible: !currentState.useExistingVisible,
         chosenClass: chosenClass
       };
@@ -87,6 +89,9 @@ class App extends Component {
         </div>
         <div className="UseExistingDiv">
           <ChooseExisting setChosenClass={this.setChosenClass} chosenClass={this.state.chosenClass} onCancel={this.toggleCancelUseExistingClass} visible={this.state.useExistingVisible}></ChooseExisting>
+        </div>
+        <div className="ClassDiv">
+          <ClassView chosenClass={this.state.chosenClass} visible={this.state.classVisible}></ClassView>
         </div>
       </div>
     );
