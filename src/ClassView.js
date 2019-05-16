@@ -66,14 +66,39 @@ class ClassView extends Component {
 
                     let absentStudentNames = [];
                     RosterRefObject.once("value", function (snapshot) {
-                            snapshot.forEach(function (childSnapshot) {
-                                let childData = childSnapshot.val();
-                                if (!presentStudentNames.includes(childData['StudentName'])) {
-                                    absentStudentNames.push(childData['StudentName']);
-                                }
-                            });
+                        snapshot.forEach(function (childSnapshot) {
+                            let childData = childSnapshot.val();
+                            if (!presentStudentNames.includes(childData['StudentName'])) {
+                                absentStudentNames.push(childData['StudentName']);
+                            }
                         });
-                    
+                    });
+
+                    for (let i = 0; i < absentStudentNames.length; i++) {
+                        // Create an empty <tr> element and add it to the 1st position of the table:
+                        var row = tableRef.insertRow();
+
+                        // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+                        var cell1 = row.insertCell(0);
+                        var cell2 = row.insertCell(1);
+
+                        // Add some text to the new cells:
+                        cell1.innerHTML = presentStudentNames[i];
+                        cell2.innerHTML = absentStudentNames[i];
+                    }
+
+                    for (let i = absentStudentNames.length; i < presentStudentNames.length; i++) {
+                        // Create an empty <tr> element and add it to the 1st position of the table:
+                        var row = tableRef.insertRow();
+
+                        // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+                        var cell1 = row.insertCell(0);
+                        var cell2 = row.insertCell(1);
+
+                        // Add some text to the new cells:
+                        cell1.innerHTML = presentStudentNames[i];
+                        cell2.innerHTML = "";
+                    }
 
                 }
                 else {
