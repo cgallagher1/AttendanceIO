@@ -485,6 +485,70 @@ hr {
 #availableClasses tr:hover {
   background-color: #ddd; }
 
+#overallClassDiv {
+  position: absolute;
+  margin: auto;
+  top: 10;
+  right: 0;
+  bottom: 10;
+  left: 0;
+  width: 1200px;
+  height: 700px;
+  background-color: white;
+  border-radius: 3px;
+  justify-content: center;
+  text-align: center;
+  border-style: solid; }
+
+#classTitleDiv {
+  align-content: center;
+  text-align: center;
+  border-radius: 3px;
+  border-style: none none solid none; }
+
+#dateAttendanceDiv::after {
+  clear: both;
+  content: "";
+  display: block; }
+
+#dateInputDiv {
+  border-radius: 3px;
+  border-style: solid;
+  padding-top: 20;
+  height: 420px;
+  width: calc(33.3333333333%);
+  float: left;
+  margin-left: 0; }
+
+#attendanceByDateDiv {
+  border-radius: 3px;
+  border-style: solid;
+  padding-top: 20;
+  height: 420px;
+  width: calc(66.6666666667%);
+  float: left;
+  margin-left: 0; }
+
+#dateChosenContainer {
+  border-radius: 3px;
+  border-style: none none solid none; }
+
+#attendanceTableForDays {
+  overflow-y: auto;
+  height: 350px; }
+
+#attendanceTable {
+  text-align: center;
+  align-content: center;
+  border: 1px solid black;
+  border-collapse: collapse; }
+
+#attendanceTable td, th {
+  border: 1px solid black; }
+
+#attendanceTable thead {
+  background-color: gray; }
+
 #ClassViewDisplayDiv {
   position: absolute;
   margin: auto;
