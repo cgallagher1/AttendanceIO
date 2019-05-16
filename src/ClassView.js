@@ -38,6 +38,35 @@ class ClassView extends Component {
             }
             else {
                 console.log("Found date");
+                let SpecificDatRef = DateRefObject.child(dateToFind + '/');
+                let presentCount = 0;
+                let absentCount = 0;
+                SpecificDatRef.once('value', function(snapshot){
+                    presentCount = snapshot.numChildren();
+                });
+                let RosterRefObject = firebase.database().ref('Classes/').child(classNameHtml + '/').child('Roster/');
+                RosterRefObject.once('value', function(snapshot){
+                    absentCount = snapshot.numChildren() - presentCount;
+                });
+
+                if(presentCount > absentCount)
+                {
+                    let presentID = [];
+                    SpecificDatRef.once('value', function(snapshot){
+                        snapshot.forEach(function(item){
+                            let itemVal = item.val();
+                            presentID.push(itemVal);
+                        })
+                    });
+                    let presentStudentNames = [];
+                    presentID.forEach(function(element){
+                        console.log(element);
+                        RosterRefObject.child(element + '/').child("StudentName").once('value', function(snapshot){
+                            console.log(snapshot.val());
+                            presentStudentNames.push(snapshot.val());
+                        });
+                    })
+                }
             }
         });
     }
@@ -84,43 +113,7 @@ class ClassView extends Component {
                                             </tr>
                                         </thead>
                                         <tbody id="tableBody">
-                                            <tr>
-                                                <td>Peter</td>
-                                                <td>Griffin</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Peter</td>
-                                                <td>Griffin</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Peter</td>
-                                                <td>Griffin</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Peter</td>
-                                                <td>Griffin</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Peter</td>
-                                                <td>Griffin</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Peter</td>
-                                                <td>Griffin</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Peter</td>
-                                                <td>Griffin</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Peter</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Peter</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Peter</td>
-                                            </tr>
+                                              
                                         </tbody>
                                     </table>
                                 </div>
