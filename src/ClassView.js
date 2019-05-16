@@ -36,7 +36,6 @@ class ClassView extends Component {
                 }
             }
             else {
-                console.log("Found date");
                 let SpecificDatRef = DateRefObject.child(dateToFind + '/');
                 let presentCount = 0;
                 let absentCount = 0;
@@ -56,18 +55,29 @@ class ClassView extends Component {
                             presentID.push(itemVal);
                         })
                     });
-                    let presentStudentNames = [];
+                    let presentStudentNames = new Array();
                     presentID.forEach(function (element) {
                         RosterRefObject.child(element + '/').child("StudentName").once('value', function (snapshot) {
                             presentStudentNames.push(snapshot.val());
                         });
                     })
 
-                    let EntireRosterID = [];
-                    RosterRefObject.once('value', function (snapshot) {
-                        EntireRosterID.push(snapshot.val());
-                        console.log(snapshot.val());
-                    })
+                    console.log(presentStudentNames);
+
+                    let absentStudentNames = [];
+                    RosterRefObject.once("value", function (snapshot) {
+                            snapshot.forEach(function (childSnapshot) {
+                                let childData = childSnapshot.val();
+                                if (!presentStudentNames.includes(childData['StudentName'])) {
+                                    absentStudentNames.push(childData['StudentName']);
+                                }
+                            });
+                        });
+                    
+
+                }
+                else {
+
                 }
             }
         });
