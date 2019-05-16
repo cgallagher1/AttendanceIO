@@ -31,8 +31,7 @@ class ClassView extends Component {
         DateRefObject.once('value', function (snapshot) {
             if (!snapshot.hasChild(dateToFind)) {
                 console.log("Does not Exists");
-                for (let i = tableRef.rows.length - 1; i >= 0; i--) 
-                {
+                for (let i = tableRef.rows.length - 1; i >= 0; i--) {
                     tableRef.deleteRow(i);
                 }
             }
@@ -41,30 +40,33 @@ class ClassView extends Component {
                 let SpecificDatRef = DateRefObject.child(dateToFind + '/');
                 let presentCount = 0;
                 let absentCount = 0;
-                SpecificDatRef.once('value', function(snapshot){
+                SpecificDatRef.once('value', function (snapshot) {
                     presentCount = snapshot.numChildren();
                 });
                 let RosterRefObject = firebase.database().ref('Classes/').child(classNameHtml + '/').child('Roster/');
-                RosterRefObject.once('value', function(snapshot){
+                RosterRefObject.once('value', function (snapshot) {
                     absentCount = snapshot.numChildren() - presentCount;
                 });
 
-                if(presentCount > absentCount)
-                {
+                if (presentCount > absentCount) {
                     let presentID = [];
-                    SpecificDatRef.once('value', function(snapshot){
-                        snapshot.forEach(function(item){
+                    SpecificDatRef.once('value', function (snapshot) {
+                        snapshot.forEach(function (item) {
                             let itemVal = item.val();
                             presentID.push(itemVal);
                         })
                     });
                     let presentStudentNames = [];
-                    presentID.forEach(function(element){
-                        console.log(element);
-                        RosterRefObject.child(element + '/').child("StudentName").once('value', function(snapshot){
-                            console.log(snapshot.val());
+                    presentID.forEach(function (element) {
+                        RosterRefObject.child(element + '/').child("StudentName").once('value', function (snapshot) {
                             presentStudentNames.push(snapshot.val());
                         });
+                    })
+
+                    let EntireRosterID = [];
+                    RosterRefObject.once('value', function (snapshot) {
+                        EntireRosterID.push(snapshot.val());
+                        console.log(snapshot.val());
                     })
                 }
             }
@@ -113,7 +115,7 @@ class ClassView extends Component {
                                             </tr>
                                         </thead>
                                         <tbody id="tableBody">
-                                              
+
                                         </tbody>
                                     </table>
                                 </div>
