@@ -3,6 +3,7 @@ import TitleDisplay from './TitleDisplay';
 import NewClass from './NewClass';
 import ChooseExisting from './ChooseExisting';
 import ClassView from './ClassView';
+import WebCam from './WebCamPage';
 import './App.css';
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
       useExistingVisible: false,
       classVisible: false,
       chosenClass: "none",
+      webCamVisible: false,
       roster: []
     };
   }
@@ -78,6 +80,26 @@ class App extends Component {
     });
   }
 
+  toggleCancelClassView = () =>{
+    this.setState((currentState)=> {
+      const newState = {
+        classVisible: !currentState.classVisible,
+        useExistingVisible: !currentState.useExistingVisible
+      };
+      return newState;
+    });
+  }
+
+  toggleWebCamView = () =>{
+    this.setState((currentState)=> {
+      const newState = {
+        classVisible: !currentState.classVisible,
+        webCamVisible: !currentState.webCamVisible
+      };
+      return newState;
+    });
+  }
+
   render() {
     return (
       <div className="App">
@@ -91,7 +113,10 @@ class App extends Component {
           <ChooseExisting setChosenClass={this.setChosenClass} chosenClass={this.state.chosenClass} onCancel={this.toggleCancelUseExistingClass} visible={this.state.useExistingVisible}></ChooseExisting>
         </div>
         <div className="ClassDiv">
-          <ClassView chosenClass={this.state.chosenClass} visible={this.state.classVisible}></ClassView>
+          <ClassView turnOnCam={this.toggleWebCamView} chosenClass={this.state.chosenClass} visible={this.state.classVisible} onCancel={this.toggleCancelClassView}></ClassView>
+        </div>
+        <div className="WebCamDiv">
+          <WebCam onCancel={this.toggleWebCamView} visible={this.state.webCamVisible}></WebCam>
         </div>
       </div>
     );

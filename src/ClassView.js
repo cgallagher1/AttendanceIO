@@ -76,11 +76,11 @@ class ClassView extends Component {
 
                     for (let i = 0; i < absentStudentNames.length; i++) {
                         // Create an empty <tr> element and add it to the 1st position of the table:
-                        var row = tableRef.insertRow();
+                        let row = tableRef.insertRow();
 
                         // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
-                        var cell1 = row.insertCell(0);
-                        var cell2 = row.insertCell(1);
+                        let cell1 = row.insertCell(0);
+                        let cell2 = row.insertCell(1);
 
                         // Add some text to the new cells:
                         cell1.innerHTML = presentStudentNames[i];
@@ -89,11 +89,11 @@ class ClassView extends Component {
 
                     for (let i = absentStudentNames.length; i < presentStudentNames.length; i++) {
                         // Create an empty <tr> element and add it to the 1st position of the table:
-                        var row = tableRef.insertRow();
+                        let row = tableRef.insertRow();
 
                         // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
-                        var cell1 = row.insertCell(0);
-                        var cell2 = row.insertCell(1);
+                        let cell1 = row.insertCell(0);
+                        let cell2 = row.insertCell(1);
 
                         // Add some text to the new cells:
                         cell1.innerHTML = presentStudentNames[i];
@@ -116,6 +116,24 @@ class ClassView extends Component {
         });
 
         this.fillTable();
+    }
+
+    toggleCancelClass = () => {
+        this.setState({
+            Day: "",
+            Month: "",
+            Year: ""
+        });
+        this.props.onCancel();
+    }
+
+    toggleCam = () => {
+        this.setState({
+            Day: "",
+            Month: "",
+            Year: ""
+        });
+        this.props.turnOnCam();
     }
 
     render() {
@@ -155,6 +173,16 @@ class ClassView extends Component {
                                     </table>
                                 </div>
                             </div>
+                        </div>
+                        <br></br>
+                        <br></br>
+                        <div className="StartWebCamDiv" id="StartWebCamDiv">
+                            <button type="button" onClick={this.toggleCam}>Start Taking Attendance</button>
+                        </div>
+                        <br></br>
+                        <br></br>
+                        <div id="CancelDiv" className="CancelDiv">
+                            <button id="CancelButton" type="button" onClick={this.toggleCancelClass}>Cancel</button>
                         </div>
                     </div>
                 </div>
